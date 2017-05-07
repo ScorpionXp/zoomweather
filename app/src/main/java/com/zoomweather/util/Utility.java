@@ -2,9 +2,11 @@ package com.zoomweather.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.zoomweather.db.City;
 import com.zoomweather.db.Country;
 import com.zoomweather.db.Province;
+import com.zoomweather.gson.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +16,18 @@ import org.json.JSONObject;
  * Created by XuPeng on 2017/5/7.
  */
 public class Utility {
+    //将返回的json数据解析成Weather实体类
+    public static Weather handleWeatherResponse(String response){
+        try {
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     //解析和处理服务器返回的省级json数据
     public static boolean handleProvinceResponse(String response){
         if(!TextUtils.isEmpty(response)){

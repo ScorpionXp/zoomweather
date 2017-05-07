@@ -1,6 +1,7 @@
 package com.zoomweather.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,9 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zoomweather.R;
+import com.zoomweather.activity.WeatherActivity;
+import com.zoomweather.activity.ZoomWeatherActivity;
 import com.zoomweather.db.City;
 import com.zoomweather.db.Country;
 import com.zoomweather.db.Province;
+import com.zoomweather.gson.Weather;
 import com.zoomweather.util.HttpUtil;
 import com.zoomweather.util.Utility;
 
@@ -84,6 +88,19 @@ public class ChooseAreaFragment extends Fragment{
                 }else if(currLevel==LEVEL_CITY){
                     selectedCity=cityList.get(position);
                     queryCountry();
+                }else if (currLevel==LEVEL_COUNTRY){
+                    String weatherId=countryList.get(position).getWeatherId();
+                    if(getActivity() instanceof ZoomWeatherActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if(getActivity() instanceof WeatherActivity){
+                        WeatherActivity weatherActivity=(WeatherActivity)getActivity();
+                        weatherActivity.drawerLayout.closeDrawers();
+                        weatherActivity.swipeRefreshLayout.setRefreshing(true);
+                        weatherActivity.requestWeather(weatherId);
+                    }
                 }
             }
         });

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="titleSize">15sp</dimen>
-    <dimen name="buttonSize">25dp</dimen>
+    <dimen name="titleSize">20sp</dimen>
+    <dimen name="buttonSize">50dp</dimen>
 </resources>
