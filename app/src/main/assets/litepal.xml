@@ -1,7 +1,7 @@
 <litepal>
 
     <dbname value="zoom_weather"/>
-    <version value="1.0"/>
+    <version value="1"/>
     <list>
         <mapping class="com.zoomweather.db.Province"/>
         <mapping class="com.zoomweather.db.City"/>

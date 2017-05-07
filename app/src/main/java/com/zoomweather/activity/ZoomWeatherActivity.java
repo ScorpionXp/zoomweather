@@ -1,7 +1,9 @@
-package com.zoomweather;
+package com.zoomweather.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.zoomweather.R;
 
 public class ZoomWeatherActivity extends AppCompatActivity {
 
